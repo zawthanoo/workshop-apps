@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dev
+
+resources:
+  - ../../base
+  - configmap.yaml
+
+commonLabels:
+  env: dev
+
+images:
+  - name: pos-app
+    newName: asia-southeast1-docker.pkg.dev/YOUR_GCP_PROJECT/YOUR_REPO/pos-app
+    newTag: latest
+
+replicas:
+  - name: pos-app
+    count: 1
