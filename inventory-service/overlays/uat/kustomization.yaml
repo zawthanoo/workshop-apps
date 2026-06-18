@@ -7,11 +7,12 @@ resources:
   - ../../base
 
 labels:
-  env: uat
+  - pairs:
+      env: uat
 
 images:
   - name: inventory-service
-    newName: ghcr.io/zawthanoo/inventory-service:
+    newName: ghcr.io/zawthanoo/inventory-service
     newTag: 0.0.1-snapshot-1-b996ca3
 
 replicas:

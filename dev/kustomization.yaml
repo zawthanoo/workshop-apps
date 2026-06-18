@@ -7,3 +7,4 @@ resources:
   - ../inventory-service/overlays/dev
   - ../order-service/overlays/dev
   - ../pos-app/overlays/dev
+  - ingress.yaml

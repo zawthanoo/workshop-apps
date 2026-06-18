@@ -22,19 +22,19 @@ spec:
           image: inventory-service:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8082
+            - containerPort: 3002
               protocol: TCP
           readinessProbe:
             httpGet:
-              path: /spring-hello/actuator/health/readiness
-              port: 8082
+              path: /inventory/products
+              port: 3002
               scheme: HTTP
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
             periodSeconds: 15
           livenessProbe:
             httpGet:
-              path: /spring-hello/actuator/health/liveness
-              port: 8082
+              path: /inventory/products
+              port: 3002
               scheme: HTTP
             initialDelaySeconds: 15
             periodSeconds: 15
@@ -45,28 +45,11 @@ spec:
                   fieldPath: spec.nodeName
           envFrom:
             - configMapRef:
-                name: inventory-service
+                name: inventory-service-config
+            - secretRef:
+                name: inventory-service-secret
           resources:
             requests:
               memory: 1024Mi
-          volumeMounts:
-            - name: inventory-service-config-volume
-              readOnly: true
-              mountPath: "/opt/mutu/config/application_config_override.yaml"
-              subPath: application_config_override.yaml
-            - name: inventory-service-secret-config-volume
-              readOnly: true
-              mountPath: "/opt/mutu/config/application_secret_override.yaml"
-              subPath: application_secret_override.yaml
       imagePullSecrets:
         - name: ghcr-io-registry
-      volumes:
-        - name: inventory-service-secret-config-volume
-          secret:
-            secretName: inventory-service
-        - name: inventory-service-config-volume
-          configMap:
-            name: inventory-service
-            items:
-              - key: application_config_override.yaml
-                path: application_config_override.yaml

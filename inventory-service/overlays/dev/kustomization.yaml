@@ -4,7 +4,8 @@ namespace: dev
 resources:
   - ../../base
 labels:
-  env: dev
+  - pairs:
+      env: dev
 images:
   - name: inventory-service
     newName: ghcr.io/zawthanoo/inventory-service

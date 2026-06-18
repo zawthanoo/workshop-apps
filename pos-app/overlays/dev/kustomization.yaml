@@ -5,7 +5,8 @@ resources:
   - ../../base
   - configmap.yaml
 labels:
-  env: dev
+  - pairs:
+      env: dev
 images:
   - name: pos-app
     newName: ghcr.io/zawthanoo/pos-app
