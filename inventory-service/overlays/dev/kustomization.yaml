@@ -8,7 +8,7 @@ commonLabels:
 images:
   - name: inventory-service
     newName: ghcr.io/zawthanoo/inventory-service
-    newTag: 0.0.1-SNAPSHOT-2-0236041
+    newTag: 0.0.1-SNAPSHOT-3-9788e23
 replicas:
   - name: inventory-service
     count: 1
