@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: dev
 resources:
   - ../../base
-commonLabels:
+labels:
   env: dev
 images:
   - name: order-service
