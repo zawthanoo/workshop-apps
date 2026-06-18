@@ -10,7 +10,7 @@ labels:
 images:
   - name: pos-app
     newName: ghcr.io/zawthanoo/pos-app
-    newTag: 9-4a06f89
+    newTag: 10-fdb06f1
 replicas:
   - name: pos-app
     count: 1
