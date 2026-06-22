@@ -46,10 +46,27 @@ spec:
           envFrom:
             - configMapRef:
                 name: inventory-service-config
-            - secretRef:
-                name: inventory-service-secret
           resources:
             requests:
               memory: 1024Mi
+          volumeMounts:
+            - name: inventory-service-config-volume
+              readOnly: true
+              mountPath: "/opt/app/config/application_config_override.yaml"
+              subPath: application_config_override.yaml
+            - name: inventory-service-secret-volume
+              readOnly: true
+              mountPath: "/opt/app/config/application_secret_override.yaml"
+              subPath: application_secret_override.yaml
       imagePullSecrets:
         - name: ghcr-io-registry
+      volumes:
+        - name: inventory-service-secret-volume
+          secret:
+            secretName: inventory-service-secret
+        - name: inventory-service-config-volume
+          configMap:
+            name: inventory-service-config
+            items:
+              - key: application_config_override.yaml
+                path: application_config_override.yaml

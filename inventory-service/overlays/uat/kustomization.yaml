@@ -1,33 +1,27 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: uat
-
 resources:
   - ../../base
-
 labels:
   - pairs:
       env: uat
-
 images:
   - name: inventory-service
     newName: ghcr.io/zawthanoo/inventory-service
-    newTag: 0.0.1-snapshot-1-b996ca3
-
+    newTag: 0.0.1-8-29a1639
 replicas:
   - name: inventory-service
-    count: 2
-
+    count: 1
 configMapGenerator:
   - name: inventory-service-config
+    files:
+      - application_config_override.yaml
     envs:
       - .env
-
 secretGenerator:
   - name: inventory-service-secret
-    envs:
-      - .secret.env
-
+    files:
+      - application_secret_override.yaml
 generatorOptions:
   disableNameSuffixHash: true

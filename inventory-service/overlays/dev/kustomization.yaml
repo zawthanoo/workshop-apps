@@ -15,11 +15,13 @@ replicas:
     count: 1
 configMapGenerator:
   - name: inventory-service-config
+    files:
+      - application_config_override.yaml
     envs:
       - .env
 secretGenerator:
   - name: inventory-service-secret
-    envs:
-      - .secret.env
+    files:
+      - application_secret_override.yaml
 generatorOptions:
   disableNameSuffixHash: true
